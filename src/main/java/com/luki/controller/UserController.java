@@ -22,8 +22,7 @@ public class UserController {
     public String index() {
         return "好好学习,天天向上!";
     }
-
-
+    
     @ResponseBody
     @GetMapping("qury/{userName}")
     public User quryUserByName(@PathVariable String userName) {
