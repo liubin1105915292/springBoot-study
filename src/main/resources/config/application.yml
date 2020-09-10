@@ -1,0 +1,40 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /aibi
+spring:
+  profiles:
+    - prod
+  datasource:
+    type: com.mchange.v2.c3p0.ComboPooledDataSource
+    url: jdbc:oracle:thin:@127.0.0.1:1521:ORCL
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    password: 1105915292
+    username: liubin_test
+  jpa:
+    #显示sql日志
+    show-sql: true
+#分页数据库类型
+pagehelper:
+  helper-dialect: oracle
+  #<!-- 该参数默认为false -->
+  #<!-- 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用 -->
+  #<!-- 和startPage中的pageNum效果一样-->
+  offset-as-page-num: true
+  row-bounds-with-count: true
+  #设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果
+  page-size-zero: true
+
+mybatis:
+  mapper-locations:
+    - classpath:mappers/*.xml
+  type-aliases-package: com.luki.pojo
+  configuration:
+    #驼峰映射
+    map-underscore-to-camel-case: true
+    #开启缓存
+    cache-enabled: false
+logging:
+  level:
+    com.luki.dao: debug
+---
