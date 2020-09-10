@@ -20,7 +20,7 @@ public class UserController {
     @RequestMapping("index")
     @ResponseBody
     public String index() {
-        return "Hello SpringBoot!";
+        return "好好学习,天天向上!";
     }
 
 
