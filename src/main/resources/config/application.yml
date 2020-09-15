@@ -38,3 +38,4 @@ logging:
   level:
     com.luki.dao: debug
 ---
+name=root-class

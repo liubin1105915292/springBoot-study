@@ -1,0 +1,42 @@
+@配置文件的加载顺序
+    1 file:./config/
+    2 file:./
+    3 classpath:/config/
+    4 classpath:/
+优先级较高的配置加载顺序比较靠后,所以覆盖顺序为1>2>3>4
+
+当使用来配置自定义配置位置时spring.config.location，它们将替换默认位置。例如，如果spring.config.location使用值配置classpath:/custom-config/,file:./custom-config/，则搜索顺序将变为以下内容：
+
+1 file:./custom-config/
+2 classpath:custom-config/
+另外，当使用来配置自定义配置位置时spring.config.additional-location，除默认位置外，还会使用它们。在默认位置之前搜索其他位置。例如，如果classpath:/custom-config/,file:./custom-config/配置了的其他位置，则搜索顺序变为以下内容：
+1 file:./custom-config/
+2 classpath:custom-config/
+3 file:./config/
+4 file:./
+5 classpath:/config/
+6 classpath:/
+
+
+@SpringBoot优点
+    独立运行,简化配置,自动配置,无代码生成和XML配置,应用监控,上手容易
+其最大的优势是约定大于配置
+@什么是springboot?
+    springboot来简化spring的应用开发,约定大于配置,去繁从简
+@springboot的工作原理
+    1.springboot在启动时会去依赖的starter包中寻找resource/META-INF/spring.factories文件,
+然后根据文件中配置的jar包去扫描项目所依赖的Jar包
+    2.根据spring.factories配置加载AutoConfigure类
+    3.根据@Conditional注解的条件,进行自动配置将Bean注入SpringContext
+
+@SpringBoot的自动配置是如何实现的?
+    springboot项目的启动注解@SpringBootApplication,其主要有以下三个注解组成
+   @SpringBootConfiguration,@EnableAutoConfiguration,@ComponentScan
+其中@EnableAutoConfiguration是实现自动配置的入口,该注解又通过@Import(AutoConfigurationImportSelector.class),
+该类中加载META-INF/spring.factories的配置信息,然后筛选出以EnableAutoConfiguration为key的数据,加载到IOC容器中,实现自动配置功能
+
+源码详解:
+AutoConfigurationImportSelector类中的getAutoConfigurationEntry和getCandidateConfigurations方法,  SpringFactoriesLoader.loadSpringFactories方法会去加载
+META-INF/spring.factories方法,通过反射机制创建对象
+
+@整合druid数据源
