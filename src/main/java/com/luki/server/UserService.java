@@ -36,4 +36,17 @@ public class UserService {
 
         AssertUtil.isTrue(userDao.addUser(user) != 1, "用户添加失败!");
     }
+
+    /**
+     * 根据多种条件查询用户
+     *
+     * @param user
+     * @return
+     */
+    public User quryUser(User user) {
+        //非空校验
+        AssertUtil.isTrue(StringUtils.isBlank(user.getUserName()) && user.getUserId() == null,
+                "查询条件不能为空");
+        return userDao.quryUser(user);
+    }
 }

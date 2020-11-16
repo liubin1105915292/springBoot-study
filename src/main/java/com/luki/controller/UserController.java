@@ -53,4 +53,20 @@ public class UserController {
         return result;
     }
 
+    @ResponseBody
+    @GetMapping("qury")
+    public ResultInfo quryUser(@RequestBody User user) {
+        ResultInfo result = new ResultInfo();
+        try {
+            User _user = userService.quryUser(user);
+            result.setResult(_user);
+        } catch (ParamsException e) {
+            result.setCode(e.getCode());
+            result.setMsg(e.getMsg());
+        } catch (Exception e) {
+            result.setCode(500);
+            result.setMsg("服务器异常!");
+        }
+        return result;
+    }
 }
